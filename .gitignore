@@ -1,0 +1,30 @@
+
+# Ignore datasets
+data/
+
+# Ignore outputs
+output/
+
+
+# Ignore backup
+backup/
+
+# Ignore models
+models/
+
+# Ignore experiments
+experiments/
+
+# Python
+__pycache__/
+*.pyc
+
+.ipynb_checkpoints/
+
+anaconda_projects/
+
+# Mac
+.DS_Store
+
+# Virtual env
+venv/

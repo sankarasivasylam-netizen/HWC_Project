@@ -14,10 +14,10 @@ MSc Dissertation project implementing a two-stage hierarchical CNN pipeline for 
 ## Dataset
 Consolidated multi-source dataset combining 7 existing benchmark datasets
 
-Trashnet (Yang & Thung, 2016) -  https://github.com/garythung/trashnet 
+Trashnet (Yang & Thung, 2016) -  https://github.com/garythung/trashnet
 Realwaste (Single et al., 2023) - https://doi.org/10.3390/info14120633
-Garbage classification (Mohamed, 2020) - https://www.kaggle.com/datasets/mostafaabla/garbage-classification 
-Mendeley data GC (Sekar, 2019) - https://www.kaggle.com/techsash/waste-classification-data 
+Garbage classification (Mohamed, 2020) - https://www.kaggle.com/datasets/mostafaabla/garbage-classification
+Mendeley data GC (Sekar, 2019) - https://www.kaggle.com/techsash/waste-classification-data
 TACO (Proença & Simões, 2020) - https://doi.org/10.48550/arXiv.2003.06975
 WaRP dataset (Yudin et al., 2024) - https://doi.org/10.1016/j.engappai.2023.107542
 Tricascade waste dataset (Nahiduzzaman et al., 2025) - https://doi.org/10.1016/j.knosys.2025.113028
@@ -36,7 +36,7 @@ Input image files organized into respective stage folders(organic/non-organic or
 
 app/
 -app.py                   # HF spaces application code
--model_loader.py          # Model loader code 
+-model_loader.py          # Model loader code
 -utils.py                 # Utility classes/functions
 -requirements.txt             # Python dependencies for HF app with Gradio UI
 notebooks/

@@ -34,21 +34,21 @@ Input image files organized into respective stage folders(organic/non-organic or
 
 ## Project Structure
 
-├── app/
-│   ├── app.py                   # HF spaces application code
-│   ├── model_loader.py          # Model loader code 
-│   └── utils.py                 # Utility classes/functions
-│   └── requirements.txt             # Python dependencies for HF app with Gradio UI
-├── notebooks/
-│   ├── dataset_creation.ipynb          # Stage-1, Stage-2 foldern creation and metadata file creation
-│   ├── datacleaning-dupicates.ipynb    # Cleaning duplicate images
-├── src/training
-│   ├── cnn_stg1.py               # Stage-1 custom CNN training and evaluation pipeline
-│   ├── cnn_stg2.py               # Stage-1 Pretrained models training and evaluation pipeline
-│   └── pre-trained-stg1.py       # Stage-2 custom CNN training and evaluation pipeline
-│   └── pre-trained-stg2.py       # Stage-2 Pretrained models training and evaluation pipeline
-├── requirements.txt             # Python dependencies
-└── README.md
+app/
+- app.py                   # HF spaces application code
+- model_loader.py          # Model loader code 
+- utils.py                 # Utility classes/functions
+- requirements.txt             # Python dependencies for HF app with Gradio UI
+notebooks/
+- dataset_creation.ipynb          # Stage-1, Stage-2 foldern creation and metadata file creation
+- datacleaning-dupicates.ipynb    # Cleaning duplicate images
+src/training
+- cnn_stg1.py               # Stage-1 custom CNN training and evaluation pipeline
+- cnn_stg2.py               # Stage-1 Pretrained models training and evaluation pipeline
+- pre-trained-stg1.py       # Stage-2 custom CNN training and evaluation pipeline
+- pre-trained-stg2.py       # Stage-2 Pretrained models training and evaluation pipeline
+requirements.txt              # Python dependencies
+README.md
 
 ## Requirements
 ```bash

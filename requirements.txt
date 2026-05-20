@@ -1,6 +1,4 @@
 grad-cam==1.5.5
-ipykernel @ file:///Users/runner/miniforge3/conda-bld/bld/rattler-build_ipykernel_1761567969/work
-grad-cam==1.5.5
 matplotlib==3.10.8
 numpy==1.26.4
 opencv-python==4.13.0.92

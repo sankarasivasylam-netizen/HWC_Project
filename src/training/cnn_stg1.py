@@ -202,11 +202,10 @@ class CNN_stage1_res(torch.nn.Module):
     """
     Custom Residual CNN architecture designed as  baseline
     
-    The architecture seelected based on Saraçoğlu & Çetin Kaya (2025) but with a reduced depth of 5 residual layers
-    simpler for binary classification. It is a purposefully built lightweight residual network trained from scratch 
-    as baseline. It consists of an initial convolution block followed by 5 residual stages, global average pooling 
-    and the classifier head. Within each stage, skip connection allows direct gradient flow through network during 
-    training preventing vanishing gradients issue like ResNet.
+    Initial convolution block followed by 5 residual stages, global average pooling 
+    and the classifier head. Within each stage, skip connection allows direct gradient
+    flow through network during training preventing vanishing gradients issue
+    like ResNet.
     
     Args
     
@@ -330,7 +329,7 @@ def train_model(model,train_loader_s1,val_loader_s1,device,output_dir, train_tra
         optimizer = torch.optim.AdamW(
             model.parameters(), lr=learning_rate, weight_decay=weight_decay)
 	    
-	    #ReduceLROnPlateau with min val loss and a patience of 3 to adjust LR
+	#ReduceLROnPlateau with min val loss and a patience of 3 to adjust LR
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
                                 optimizer,
                                 mode='min',
@@ -371,7 +370,7 @@ def train_model(model,train_loader_s1,val_loader_s1,device,output_dir, train_tra
 
             if epoch == 25:
 	    
-		        #Phase wise training - Switch transform for progressive resizing
+		#Phase wise training - Switch transform for progressive resizing
                 train_ds_stage1.transforms_dict = train_transforms_2
                 val_ds_stage1.transforms_dict = val_transform_2
                 print("Switched to phase 3 transform")
@@ -488,6 +487,8 @@ def train_model(model,train_loader_s1,val_loader_s1,device,output_dir, train_tra
             "epoch": epoch,
          }, output_dir/filename)
 
+        #Plot train-val accuracy and loss plots
+        
         epochs = range(1, num_epochs +1)
         acc_title = f"Training-Validation_Accuracy_{model_name}"
         plt.title(acc_title)
@@ -625,7 +626,7 @@ def grad_camplus(file,model,model_name,output_dir,device):
 		        grayscale_cam = cam(input_tensor=img_tensor,targets=targets)[0]
         
 		        rgb_img = np.array(pil_img.resize((224,224))).astype(np.float32) / 255.0
-                #Activation map generation
+                        #Activation map generation
 		        visualization = show_cam_on_image(rgb_img, grayscale_cam, use_rgb=True)
 
 		        color = "blue" if label.lower() == true_label.lower() else "red"
@@ -753,7 +754,7 @@ def eval_model(model,best_model_file,test_loader_s1,device,output_dir,class_name
         plt.close()
 
 
-        #Confusin Matrix
+        #Confusion Matrix
         cm = confusion_matrix(all_labels, all_predictions)
         fig, ax= plt.subplots()
         sns.heatmap(cm, annot=True, fmt='g', ax=ax,xticklabels=class_names,yticklabels=class_names);
@@ -818,7 +819,7 @@ def eval_model(model,best_model_file,test_loader_s1,device,output_dir,class_name
         eval_metrics_file = f"eval_metrics_{model_name}_{timestamp}.csv"
         eval_metrics_df.to_csv(output_dir/eval_metrics_file, index=False)
 		
-	    #Grad-CAM eval of 20 images from val and test dataset
+	#Grad-CAM eval of 20 images from val and test dataset
 		
         grad_camplus(val_file,model,model_name,output_dir,device)
         grad_camplus(test_file,model,model_name,output_dir,device)
@@ -854,7 +855,13 @@ def main():
 
         print("Using device:", device)
 
-        #Input data location and folders config
+        '''Input data location and folders config
+
+        Input image files organized into respective stage folders(organic/non-organic) inside
+        parent_dir/waste_classification/data/consolidated
+        Metadata file for training in parent_dir/waste_classification/data/metadata
+        Output file generated in parent_dir/output'''
+        
         os.chdir('/home/968001/waste_classification/')
         BASE_DIR = Path.cwd()
         META_DIR = BASE_DIR / "data" / "metadata"
@@ -862,7 +869,7 @@ def main():
         output_dir = BASE_DIR / "output" / "Stage1" / "cnn" /  "V8"
         val_file = output_dir/"val_data.csv"
         test_file = output_dir/"test_data.csv"
-
+        #Load metadata file that contains file path, true label, type and source for every image
         metadata_df = pd.read_csv(file1)
 
         #Stratified split
@@ -1075,3 +1082,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#### References used for creating a few elements of this script
+# Geeksforgeeks (2025) ResNet18 from Scratch Using PyTorch. https://www.geeksforgeeks.org/deep-learning/resnet18-from-scratch-using-pytorch/
+# Medium (2024) Build Custom PyTorch Image Classifier from Scratch. https://rumn.medium.com/custom-pytorch-image-classifier-from-scratch-d7b3c50f9fbe
+# Geeksforgeeks (2025) Implementation of a CNN based Image Classifier using PyTorch.\
+# https://www.geeksforgeeks.org/machine-learning/implementation-of-a-cnn-based-image-classifier-using-pytorch/

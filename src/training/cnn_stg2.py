@@ -237,11 +237,10 @@ class CNN_stage2_res(torch.nn.Module):
     """
     Custom Residual CNN architecture designed as baseline
     
-    The architecture seelected based on Saraçoğlu & Çetin Kaya (2025)  with 4 residual layers
-    for multi-class classification. It is a purposefully built lightweight residual network trained from scratch 
-    as baseline. It consists of an initial convolution block followed by 8 residual stages, global average pooling 
-    and the classifier head. Within each stage, skip connection allows direct gradient flow through network during 
-    training preventing vanishing gradients issue like ResNet.
+    Initial convolution block followed by 8 residual blocks, global average pooling 
+    and the classifier head. Within each stage, skip connection allows direct gradient
+    flow through network during training preventing vanishing gradients issue
+    like ResNet.
     
     Args
     
@@ -983,7 +982,11 @@ def main():
         
         #Input data location and folders config
         #Input image files for training were kept in viper user home location 
-        #with directory structure /home/968001/waste_classification/dara
+        #with directory structure /home/968001/waste_classification/data
+        #Input image files organized into respective stage folders(13 classes) inside
+        #parent_dir/waste_classification/data/consolidated
+        #Metadata file for training in parent_dir/waste_classification/data/metadata
+        #Output file generated in parent_dir/output
         
         os.chdir('/home/968001/waste_classification/')
 
@@ -994,7 +997,7 @@ def main():
         
         val_file =  f"val_data_{timestamp}.csv"
         test_file = f"test_data_{timestamp}.csv"
-
+        #Load metadata file that contains file path, true label, type and source for every image
         metadata_df = pd.read_csv(file1)
          #Filter only Stage2 rows i.e with stage2 labels present
         stg2_meta_df = metadata_df.loc[~metadata_df['stage2_label'].isin(['Non_Organic','Organic'])].copy()
@@ -1337,3 +1340,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+#### References used for creating a few elements of this script
+# Geeksforgeeks (2025) ResNet18 from Scratch Using PyTorch. https://www.geeksforgeeks.org/deep-learning/resnet18-from-scratch-using-pytorch/
+# Medium (2024) Build Custom PyTorch Image Classifier from Scratch. https://rumn.medium.com/custom-pytorch-image-classifier-from-scratch-d7b3c50f9fbe
+# Geeksforgeeks (2025) Implementation of a CNN based Image Classifier using PyTorch.\
+# https://www.geeksforgeeks.org/machine-learning/implementation-of-a-cnn-based-image-classifier-using-pytorch/

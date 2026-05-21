@@ -34,7 +34,7 @@ Input image files organized into respective stage folders(organic/non-organic or
 
 ## Project Structure
 
-app/
+```app/
 -app.py                   # HF spaces application code
 -model_loader.py          # Model loader code
 -utils.py                 # Utility classes/functions
@@ -49,6 +49,7 @@ src/training/
 -pre-trained-stg2.py       # Stage-2 Pretrained models training and evaluation pipeline
 requirements.txt              # Python dependencies
 README.md
+```
 
 ## Requirements
 ```bash

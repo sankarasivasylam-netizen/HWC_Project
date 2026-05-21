@@ -1,6 +1,6 @@
 grad-cam==1.5.5
-matplotlib==3.10.8
 numpy==1.26.4
+matplotlib==3.10.8
 opencv-python==4.13.0.92
 pandas==2.3.3
 Pillow==10.0.0
